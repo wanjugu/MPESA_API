@@ -55,7 +55,7 @@ class MpesaController extends Controller
         curl_setopt($curl,CURLOPT_HTTPHEADER,array('Content-Type:application/json',
         'Authorization:Bearer '.$this->generateAccessToken()));
 
-        $curl_post_data = array(
+        $curl_post_data = [
             //Fill in the request parameters with valid values
             'BusinessShortCode' => 174379,
             'Password' => $this->lipaNaMpesaPassword(),
@@ -64,11 +64,11 @@ class MpesaController extends Controller
             'Amount"' => 5,
             'PartyA' => 254725239191,//phone number sending
             'PartyB' => 174379, //organization shortcode receiving the funds
-            'PhoneNumber' => ' ',//phone number sending the funds
+            'PhoneNumber' => 254725239191,//phone number sending the funds
             'CallBackURL' => 'https://blog.hlab.tech/',//the url response where mpesa response will be sent
             'AccountReference' => 'Test Reference',
             'TransactionDesc' => 'Testing stk push on sandbox '
-          );
+        ];
 
           $data_string = json_encode($curl_post_data);
 
@@ -77,8 +77,10 @@ class MpesaController extends Controller
           curl_setopt($curl,CURLOPT_POSTFIELDS,$data_string);
 
           $curl_response = curl_exec($curl);
-          echo $curl_response;
 
-         // return $curl_response;
+          echo $curl_response;
+         
+
+           return $curl_response;
     }
 }
