@@ -48,39 +48,39 @@ class MpesaController extends Controller
      */
     public function customerMpesaSTKPush()
     {
-        $url = ' https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
 
         $curl = curl_init();
         curl_setopt($curl,CURLOPT_URL,$url);
-        curl_setopt($curl,CURLOPT_HTTPHEADER,array('Content-Type:application/json',
-        'Authorization:Bearer '.$this->generateAccessToken()));
-
+        curl_setopt($curl,CURLOPT_HTTPHEADER, array('Content-Type:application/json',
+        'Authorization:Bearer '.$this->generateAccessToken()));  
+       
         $curl_post_data = [
             //Fill in the request parameters with valid values
             'BusinessShortCode' => 174379,
             'Password' => $this->lipaNaMpesaPassword(),
             'Timestamp' => Carbon::rawParse('now')->format('YmdHms'),
             'TransactionType' => 'CustomerPayBillOnline',
-            'Amount"' => 5,
+            'Amount' => 5,
             'PartyA' => 254725239191,//phone number sending
             'PartyB' => 174379, //organization shortcode receiving the funds
             'PhoneNumber' => 254725239191,//phone number sending the funds
             'CallBackURL' => 'https://blog.hlab.tech/',//the url response where mpesa response will be sent
-            'AccountReference' => 'Test Reference',
-            'TransactionDesc' => 'Testing stk push on sandbox '
+            'AccountReference' => "H-lab tutorial",
+            'TransactionDesc' => "Testing stk push on sandbox"
         ];
 
           $data_string = json_encode($curl_post_data);
 
-          curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-          curl_setopt($curl,CURLOPT_POST,true);
-          curl_setopt($curl,CURLOPT_POSTFIELDS,$data_string);
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($curl, CURLOPT_POST, true);
+          curl_setopt($curl, CURLOPT_POSTFIELDS,$data_string);
 
           $curl_response = curl_exec($curl);
 
-          echo $curl_response;
-         
+          echo $curl_response;   
+          
 
-           return $curl_response;
+           //return $curl_response;
     }
 }
