@@ -66,7 +66,7 @@ class MpesaController extends Controller
             'PartyB' => 174379, //organization shortcode receiving the funds
             'PhoneNumber' => 254725239191,//phone number sending the funds
             'CallBackURL' => 'https://blog.hlab.tech/',//the url response where mpesa response will be sent
-            'AccountReference' => "H-lab tutorial",
+            'AccountReference' => "GrosBeaq Music",
             'TransactionDesc' => "Testing stk push on sandbox"
         ];
 
@@ -78,9 +78,6 @@ class MpesaController extends Controller
 
           $curl_response = curl_exec($curl);
 
-          echo $curl_response;   
-          
-
-           //return $curl_response;
+           return $curl_response;
     }
 }
