@@ -135,4 +135,27 @@ class MpesaController extends Controller
 
         return $response;
     }
+
+    /**
+     * M-pesa Register Validation and Confirmation method
+     */
+    public function mpesaRegisterUrls(){
+        $curl =  curl_init();
+        curl_setopt($curl, CURLOPT_URL,"https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl");
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array(
+            'content-type:application/json','Authorization: Bearer '. $this->generateAccessToken()
+        ));
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($curl,CURLOPT_POST, true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,json_encode(array(
+            'ShortCode'=>"600141",
+            'ResponseType'=>'Completed',
+            'ConfirmationUrl'=>"https://blog.hlab.tech/api/v1/hlab/transaction/confirmation",
+            'ValidationURL' => "https://blog.hlab.tech/api/v1/hlab/validation"
+
+        )));
+
+        $curl_response = curl_exec($curl);
+        echo $curl_response;
+    }
 }

@@ -22,3 +22,4 @@ Route::post('v1/access/token','MpesaController@generateAccessToken');
 Route::post('v1/test/stk/push','MpesaController@customerMpesaSTKPush');
 Route::post('v1/test/validation','MpesaController@mpesaValidation');
 Route::post('v1/test/transaction/confirmation','MpesaController@mpesaConfirmation');
+Route::post('v1/test/register/url','MpesaController@mpesaRegisterUrls');
